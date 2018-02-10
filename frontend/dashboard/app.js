@@ -3,9 +3,11 @@ var app = angular.module('cleaner', ['ngRoute', 'ngSanitize', 'ui.select', 'toas
 // var site_url = document.location.origin;
 // if (site_url === 'http://cleaner.dev')
 //     site_url = 'http://project-demos.com/repair';
-var api_base_url = "http://project-demos.com/repair/api/web/v1";
+var api_base_url = "http://blakbronco.com/demo/cleaner1/api/web/v1";
+
 app.run(function ($rootScope, $compile, $location, $http, toaster, $cookies, $window) {
     $rootScope.api_img_url = "http://project-demos.com/repair/common/upload/";
+    $rootScope.web_url = "http://blakbronco.com/demo/cleaner1/frontend";
 
     if ($cookies.get('auth_token') && $cookies.get('id') && $cookies.get('role')) {
         //console.log("Successfully Getting Aut role status and ID");
