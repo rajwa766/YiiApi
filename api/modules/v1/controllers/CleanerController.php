@@ -89,12 +89,14 @@ class CleanerController extends ActiveController
   { 
     $actions = parent::actions();
     $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+  
     return $actions;
   }
 
   public function prepareDataProvider() 
   {
-    $searchModel = new \common\models\CleanerSearch();    
+    $searchModel = new \common\models\CleanerSearch();  
+    
     return $searchModel->search(\Yii::$app->request->queryParams);
   }
 

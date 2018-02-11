@@ -17,6 +17,7 @@ use common\models\User;
 use common\models;
 use yii\filters\auth\QueryParamAuth;
 use common\models\Mall;
+use ruskid\stripe\StripeCheckout;
 use Yii;
 
 class JobController extends ActiveController
@@ -116,14 +117,41 @@ class JobController extends ActiveController
     unset($actions['update']);
     return $actions;
   }
-
+public function  actionPayment(){
+    \Stripe\Stripe::setApiKey(Yii::$app->stripe->privateKey);
+    //      // $request = Yii::$app->request;
+         $token = \Stripe\Token::create(array(
+          "card" => array(
+            "number" => "4242424242424242",
+            "exp_month" => 8,
+            "exp_year" => 2018,
+            "cvc" => "314"
+          )
+        ));
+        //  $token = $request->post('stripeToken');
+          //$token  = $_POST['stripeToken'];
+          $customer = \Stripe\Customer::create(array(
+              'email' => 'customer@example.com',
+              'source'  => $token
+          ));
+    
+          $charge = \Stripe\Charge::create(array(
+              'customer' => $customer->id,
+              'amount'   => 2000,
+              'currency' => 'usd'
+          ));
+    var_dump($charge);
+    exit();
+}
   public function prepareDataProvider() 
   {
+    
     $searchModel = new \common\models\JobSearch();    
     return $searchModel->search(\Yii::$app->request->queryParams);
   }
   public function actionCleanerJobs()
   {  
+   
     $cleaner_regions=\common\models\CleanerRegion::find()->where(['cleaner_user_id'=>Yii::$app->user->identity->id])->all();
 
    $regions=array();

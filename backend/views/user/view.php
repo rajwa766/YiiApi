@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use ruskid\stripe\StripeCheckout;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -11,7 +12,15 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
-
+<?= 
+StripeCheckout::widget([
+    'action' => '/',
+    'name' => 'Demo test',
+    'description' => '2 widgets ($20.00)',
+    'amount' => 2000,
+    'image' => '/128x128.png',
+]);
+?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
