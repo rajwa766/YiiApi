@@ -282,7 +282,8 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
     $scope.searchcleanData = {};
     $scope.show_search_clean = true;
     $scope.show_table_clean = false;
-    $scope.search_cleaners = function () {
+    $scope.showBackButton = false;
+    $scope.search_cleaners = function (val) {
         if (!$scope.searchcleanData.category_id)
             $scope.searchcleanData.category_id = "";
         if (!$scope.searchcleanData.region_id)
@@ -295,19 +296,23 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
                 }
             })
             .then(function (data) {
-                ////console.log(data);
                 $scope.rsc = data.data.items; // result search cleaner
                 console.log(data.data.items.length);
                 $scope.length_of_result = "";
                 $scope.length_of_result = data.data.items.length;
                 $scope.show_search_clean = false;
                 $scope.show_table_clean = true;
-
+                $scope.showBackButton = true;
+                if (!val) {
+                    $scope.showBackButton = false;
+                }
             }, function (error) {
-                ////console.log(error);
 
             });
+
     };
+
+    $scope.search_cleaners();
 
     /************************************************** Add preferredform ends here ************************************/
 

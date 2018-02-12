@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <!--<base href="/cleaner/frontend/">-->
+    <!-- <base href="/YiiApi/frontend/"> -->
     <meta name="language" content="en" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -39,7 +39,9 @@
     <div>
         <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
     </div>
-    <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
+    <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
+        <i class="ti-menu"></i>
+    </a>
     <div id="wrapper" class="m-t-100">
         <!-- Navigation -->
         <!-- Left navbar-header -->
@@ -49,17 +51,17 @@
                     <div class="col-md-3 col-xs-12 col-sm-6">
                         <a class="logo" href="index.html">
                             <span>
-  							<img src="dashboard/asset_files/images/logo1.PNG" alt="ecoclean">
-  						</span>
+                                <img src="dashboard/asset_files/images/logo1.PNG" alt="ecoclean">
+                            </span>
                         </a>
                     </div>
 
                     <div class="col-md-offset-7 col-md-2 col-xs-12 col-sm-6 p-t-10">
                         <div class="col-md-6 col-xs-6 col-sm-3">
-                            <a href="/dashboard/#/login" class="btn btn-link width-100p">login</a>
+                            <a href="/YiiApi/frontend/dashboard/#/login" class="btn btn-link width-100p">login</a>
                         </div>
                         <div class="col-md-6 col-xs-6 col-sm-6">
-                            <a href="/dashboard/#/signup" class="btn btn-info width-100p">Signup</a>
+                            <a href="/YiiApi/frontend/dashboard/#/signup" class="btn btn-info width-100p">Signup</a>
                         </div>
 
                     </div>
@@ -82,38 +84,54 @@
                 <div class="row m-t-10">
                     <div class="col-sm-12 col-md-offset-1 col-md-10 icon-list-demo clearfix white-box" style="padding:0px;text-align: center;">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home">
-                            <img src="dashboard/asset_files/images/icons/home.png" class="display-block m-a   font-size-30 color-blue">                            Cleaning - Home</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/office.png" class="display-block m-a   font-size-30 color-blue">                            Cleaning - Office</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/stairs-clean.png" class="display-block m-a   font-size-30 color-blue">                            Cleaning of stairs</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/sold-house.png" class="display-block m-a   font-size-30 color-blue">Cleaning
-                            - house sold</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/stairs.png" class="display-block m-a   font-size-30 color-blue">                            Stairs</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/garbage.png" class="display-block m-a   font-size-30 color-blue">                            Removal of garbage</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/user.png" class="display-block m-a   font-size-30 color-blue">                            Caretaker</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/truck.png" class="display-block m-a   font-size-30 color-blue">                            Transport</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/bug.png" class="display-block m-a   font-size-30 color-blue">                            Pest control</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/renovation.png" class="display-block m-a   font-size-30 color-blue">                            Renovations</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/clean-products.png" class="display-block m-a   font-size-30 color-blue">                            Cleaning products</div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center"><img src="dashboard/asset_files/images/icons/mops.png" class="display-block m-a   font-size-30 color-blue">                            Mops and mats</div>
+                            <img src="dashboard/asset_files/images/icons/home.png" class="display-block m-a   font-size-30 color-blue"> Cleaning - Home</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/office.png" class="display-block m-a   font-size-30 color-blue"> Cleaning - Office</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/stairs-clean.png" class="display-block m-a   font-size-30 color-blue"> Cleaning of stairs</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/sold-house.png" class="display-block m-a   font-size-30 color-blue">Cleaning - house sold</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/stairs.png" class="display-block m-a   font-size-30 color-blue"> Stairs</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/garbage.png" class="display-block m-a   font-size-30 color-blue"> Removal of garbage</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/user.png" class="display-block m-a   font-size-30 color-blue"> Caretaker</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/truck.png" class="display-block m-a   font-size-30 color-blue"> Transport</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/bug.png" class="display-block m-a   font-size-30 color-blue"> Pest control</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/renovation.png" class="display-block m-a   font-size-30 color-blue"> Renovations</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/clean-products.png" class="display-block m-a   font-size-30 color-blue"> Cleaning products</div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-t-20 p-b-20 bord-home text-center">
+                            <img src="dashboard/asset_files/images/icons/mops.png" class="display-block m-a   font-size-30 color-blue"> Mops and mats</div>
                     </div>
                 </div>
-              
+
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="white-box">
                             <div class="row default-steps">
                                 <div class="col-md-4 column-step">
-                                    <div class="step-number"><i class="fa fa-user"></i></div>
+                                    <div class="step-number">
+                                        <i class="fa fa-user"></i>
+                                    </div>
                                     <div class="step-title">Highly-trained staff</div>
                                     <div class="step-info">Sed ut perspiciatis, unde omnis is natus error sit voluptatem </div>
                                 </div>
                                 <div class="col-md-4 column-step active">
-                                    <div class="step-number"><i class="fa fa-thumbs-up"></i></div>
+                                    <div class="step-number">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </div>
                                     <div class="step-title">Quality cleaning tools</div>
                                     <div class="step-info">Doloremque laudantium, totam aperiam eaque ipsa, quae abillo</div>
                                 </div>
                                 <div class="col-md-4 column-step">
-                                    <div class="step-number"><i class="fa fa-clock-o"></i></div>
+                                    <div class="step-number">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
                                     <div class="step-title">Fast & Effective service</div>
                                     <div class="step-info">Voluptatem accusantium doloremque laudantium totam molam</div>
                                 </div>
@@ -128,8 +146,8 @@
                 <div class="col-md-4">
                     <a class="logo" href="index.html">
                         <span>
-  							<img src=" dashboard/asset_files/images/logo1.PNG" alt="ecoclean">
-					</span>
+                            <img src=" dashboard/asset_files/images/logo1.PNG" alt="ecoclean">
+                        </span>
                     </a>
                 </div>
                 <div class="col-md-4 text-center p-t-20">
@@ -138,10 +156,26 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="icons p-t-20 text-center">
-                        <li><a class="fb" href="#"><i class="fa fa-facebook-square"></i></a> </li>
-                        <li><a class="google" href="#"><i class="fa fa-google-plus-square"></i></a> </li>
-                        <li><a class="twitter" href="#"><i class="fa fa-twitter-square"></i></a> </li>
-                        <li><a class="youtube" href="#"><i class="fa fa-youtube-square"></i></a> </li>
+                        <li>
+                            <a class="fb" href="#">
+                                <i class="fa fa-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="google" href="#">
+                                <i class="fa fa-google-plus-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="twitter" href="#">
+                                <i class="fa fa-twitter-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="youtube" href="#">
+                                <i class="fa fa-youtube-square"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
