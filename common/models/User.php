@@ -6,7 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-
+use yii\db\Query;
 /**
  * User model
  *
@@ -110,7 +110,21 @@ class User extends ActiveRecord implements IdentityInterface
         'first_name',
         'last_name',
         'contact_no',
-        'address',
+               'rating'=>function($model)
+            {
+                // $cleaner_rating=array();
+                $cleanerRating = (new Query())
+                ->select('COUNT(id),SUM(rating) as rating')
+                ->from('rating')
+                ->where("cleaner_user_id = '$model->id'")
+                ->all();
+                if($cleanerRating[0]['COUNT(id)']){
+                    return  $cleanerRating[0]['rating']/$cleanerRating[0]['COUNT(id)'];
+                }else{
+                    return  $cleanerRating[0]['rating'];
+                    
+                }
+            },
         //'password'
         ];
     } 

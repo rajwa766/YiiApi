@@ -49,8 +49,10 @@ class Cleaner extends \yii\db\ActiveRecord
     }
     public function extraFields()
     {
+    
         return [
             'user',
+            // 'rating',
             'cleaner_categories'=>function($model)
             {
                 $cleaner_category=array();
@@ -59,6 +61,7 @@ class Cleaner extends \yii\db\ActiveRecord
 
                         $cleaner_category[]=$cc->category;
                     };
+    
                     return  $cleaner_category;
             },
                  'cleaner_regions'=>function($model)
@@ -71,6 +74,17 @@ class Cleaner extends \yii\db\ActiveRecord
                     };
                     return   $cleaner_regions;
             },
+            // 'cleaner_rating'=>function($model)
+            // {
+            //     // $cleaner_rating=array();
+            //     $cleanerRating = (new Query())
+            //     ->select('SUM(rating) as rating')
+            //     ->from('rating')
+            //     ->where("cleaner_user_id = '$model->user_id'")
+            //     ->one();
+             
+            //         return   $cleanerRating;
+            // },
         ];
     }
 
@@ -79,15 +93,19 @@ class Cleaner extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
+        
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    public function getRating()
+    {
+        return 'sajid';
+        
+    }
      public static function getOptions(){
-
 
     $query=(new Query())->select(['user_id','user.email'])->from('cleaner')->innerJoin('user','user_id = user.id')->all();
 
        $value=(count($query)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($query,'user_id','email'); //id = your ID model, name = your caption
-
        return $value;
    
     }
@@ -106,4 +124,5 @@ class Cleaner extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CleanerRegion::className(), ['cleaner_user_id' => 'user_id']);
     }
+    
 }

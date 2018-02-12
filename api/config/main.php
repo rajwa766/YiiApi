@@ -155,6 +155,17 @@ return [
                         'OPTIONS show-ads' => 'options',
                    ]
              ],
+             [
+                'class'=>'yii\rest\UrlRule',
+              'controller'=>[
+                  'v1/job',
+              ],
+              'pluralize'=>false,
+              'extraPatterns' => [
+                  'GET payment' => 'payment',
+                  'OPTIONS payment' => 'options',
+             ]
+       ],
 
     [
                     'class'=>'yii\rest\UrlRule',
