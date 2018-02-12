@@ -24,7 +24,9 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         $http({
             method: 'GET',
             url: api_base_url + '/users/' + id + '?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.profileData = data.data;
             ////console.log($scope.profileData.address);
@@ -45,11 +47,13 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
 
     $scope.updateprofile = function (id) {
         $http({
-            method: 'PUT',
-            url: api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token,
-            data: $.param($scope.profileData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'PUT',
+                url: api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token,
+                data: $.param($scope.profileData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "Successfully Update Profile", null, 'trustedHtml');
                 $route.reload();
@@ -65,12 +69,14 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
 
     /*********************************************** Preferred Regions **********************************************/
 
-    var pr = this;          //for searchable dropdwn
+    var pr = this; //for searchable dropdwn
     $scope.pref_regions = function () {
         $http({
             method: 'GET',
             url: api_base_url + '/regions?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.regions = data.data.items;
             pr.regions = $scope.regions;
@@ -90,7 +96,9 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         $http({
             method: 'GET',
             url: api_base_url + '/categories?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.pref_categories = data.data.items;
             pc.categories = $scope.pref_categories;
@@ -107,13 +115,15 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
 
     $scope.postjob = function () {
         $scope.jobData.image = $scope.multi_images_result;
-        $scope.jobData.status = 1;     // Create a job with status = 1 -> Pending
+        $scope.jobData.status = 1; // Create a job with status = 1 -> Pending
         $http({
-            method: 'POST',
-            url: api_base_url + '/jobs?access-token=' + $rootScope.auth_token,
-            data: $.param($scope.jobData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'POST',
+                url: api_base_url + '/jobs?access-token=' + $rootScope.auth_token,
+                data: $.param($scope.jobData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "Successfully Postd Job", null, 'trustedHtml');
                 $scope.jobData = [];
@@ -148,7 +158,9 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         $http({
             method: 'GET',
             url: api_base_url + '/job/customer-jobs?expand=region,category,user&access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.ljobs = data.data.items;
             ////console.log($scope.ljobs);
@@ -174,8 +186,11 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         ////console.log(id);
         if ($window.confirm('Are you sure you want to delete this job?')) {
 
-            $http.delete(api_base_url + '/jobs/' + id + '?expand=region,category,user&access-token=' + $rootScope.auth_token,
-                { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+            $http.delete(api_base_url + '/jobs/' + id + '?expand=region,category,user&access-token=' + $rootScope.auth_token, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
                 .then(function (data) {
                     toaster.pop('success', "", "Successfully Product Job ", null, 'trustedHtml');
                     $scope.list_job();
@@ -185,8 +200,7 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
                     ////console.log(error);
 
                 });
-        }
-        else {
+        } else {
             return false;
         };
 
@@ -196,24 +210,25 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
     /************************************************** Update Single Job ends here ************************************************/
 
     $scope.updatejob = function (id) {
-        $scope.jobData.status = 2;     // Create a job with status = 2 -> In progress
+        $scope.jobData.status = 2; // Create a job with status = 2 -> In progress
         console.log($scope.update_job_images);
         if (!$scope.update_job_images.length) {
             $scope.update_job_images.push(0);
             $scope.jobData.image = [];
             $scope.jobData.image = $scope.update_job_images;
-        }
-        else {
+        } else {
             $scope.jobData.image = $scope.update_job_images;
         }
         console.log($scope.jobData);
 
         $http({
-            method: 'PUT',
-            url: api_base_url + '/jobs/' + id + '?expand=region,category,user&access-token=' + $rootScope.auth_token,
-            data: $.param($scope.jobData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'PUT',
+                url: api_base_url + '/jobs/' + id + '?expand=region,category,user&access-token=' + $rootScope.auth_token,
+                data: $.param($scope.jobData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "Successfully Update Job", null, 'trustedHtml');
                 $route.reload();
@@ -273,13 +288,15 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         if (!$scope.searchcleanData.region_id)
             $scope.searchcleanData.region_id = "";
         $http({
-            method: 'GET',
-            url: api_base_url + '/cleaners?category=' + $scope.searchcleanData.category_id + '&region=' + $scope.searchcleanData.region_id + '&expand=user&access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'GET',
+                url: api_base_url + '/cleaners?category=' + $scope.searchcleanData.category_id + '&region=' + $scope.searchcleanData.region_id + '&expand=user&access-token=' + $rootScope.auth_token,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 ////console.log(data);
-                $scope.rsc = data.data.items;  // result search cleaner
+                $scope.rsc = data.data.items; // result search cleaner
                 console.log(data.data.items.length);
                 $scope.length_of_result = "";
                 $scope.length_of_result = data.data.items.length;
@@ -301,7 +318,9 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
             ({
                 method: 'GET',
                 url: api_base_url + '/user/get-cleaner?access-token=' + $rootScope.auth_token,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             })
             .then(function (response) {
                 $scope.all_cleaners = response.data;
@@ -319,18 +338,20 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
     $scope.ratingData = {};
     // $scope.ratingData.rating = 5;
     $scope.ratingData.job_id = $routeParams.jobid;
-    $scope.ratingData.customer_user_id = $rootScope.id;  /* Customer Id */
+    $scope.ratingData.customer_user_id = $rootScope.id; /* Customer Id */
     ///$scope.ratingData.cleaner_id = 43;
     $scope.ratingData.review = "Its been a wonderfull experience with you. Really Enjoyed and glad to spent some quality time chit chats. Please leave feed back to let others know how was Your experience with Me";
     $scope.ratingData.rated_by = $rootScope.role;
 
     $scope.cleaner_rating = function () {
         $http({
-            method: 'POST',
-            url: api_base_url + '/ratings?access-token=' + $rootScope.auth_token,
-            data: $.param($scope.ratingData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'POST',
+                url: api_base_url + '/ratings?access-token=' + $rootScope.auth_token,
+                data: $.param($scope.ratingData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "You have given rating Successfully", null, 'trustedHtml')
                 $location.path('/cust-dash');
@@ -363,8 +384,12 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         if (files && files.length) {
             Upload.upload({
                 url: api_base_url + '/upload/multi-upload?access-token=' + $rootScope.auth_token,
-                headers: { 'Authorization': $rootScope.auth_token },
-                data: { Photos: Photos }
+                headers: {
+                    'Authorization': $rootScope.auth_token
+                },
+                data: {
+                    Photos: Photos
+                }
             }).then(function (response) {
                 $timeout(function () {
                     $scope.fileselected = false;
@@ -380,8 +405,7 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
                                 $scope.update_job_images.push(response.data[i]);
                             console.log($scope.update_job_images);
                         }
-                    }
-                    else {
+                    } else {
                         $scope.multi_images_result = response.data;
                         console.log(response);
                     }
@@ -407,7 +431,9 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
             ({
                 method: 'GET',
                 url: api_base_url + '/ad-pool/show-ads?access-token=' + $rootScope.auth_token,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             })
             .then(function (response) {
                 $scope.all_ads = response.data;
@@ -422,6 +448,3 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
     /****************************************************All Users ends here ***************************************************** */
 
 });
-
-
-

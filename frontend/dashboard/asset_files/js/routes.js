@@ -86,6 +86,19 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }
             }
         })
+        .when('/allcleaners', {
+            templateUrl: 'partials/cust-dash/views/allCleaners.html',
+            controller: 'cdashCtrl',
+            resolve: {
+                lazy: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    // you can lazy load files for an existing module
+                    return $ocLazyLoad.load({
+                        name: 'cleaner',
+                        files: ['partials/cust-dash/controllers/custdash.js']
+                    });
+                }]
+            }
+        })
         .when('/activate-account', {
             templateUrl: 'partials/activate-account/views/activate.html',
             controller: 'activateCtrl',
@@ -112,7 +125,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }],
                 app: function ($q, checkAuth) {
                     $q.defer();
-                    return checkAuth.customer();  /* Only customer can access this page*/
+                    return checkAuth.customer(); /* Only customer can access this page*/
                 }
             }
         })
@@ -122,7 +135,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             resolve: {
                 app: function ($q, checkAuth, $route) {
                     $q.defer();
-                    return checkAuth.cleaner($route.current.params.jobid);  /* Only cleaner can access this page*/
+                    return checkAuth.cleaner($route.current.params.jobid); /* Only cleaner can access this page*/
                 },
                 lazy: ['$ocLazyLoad', function ($ocLazyLoad) {
                     // you can lazy load files for an existing module
@@ -179,74 +192,71 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 /*Pre check user auth, if user is authorized to open page*/
-app.factory('checkAuth', function ($http, $rootScope, $location, $cookies,$route) {
+app.factory('checkAuth', function ($http, $rootScope, $location, $cookies, $route) {
     return {
         get: function () {
-            if ($rootScope.auth_token) {    //if auth token is saved then check does it return the user profile data
-              return $http.get(api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token,
-                    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+            if ($rootScope.auth_token) { //if auth token is saved then check does it return the user profile data
+                return $http.get(api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token, {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    })
                     .then(function (data) {
                         //return data; // if yes then okaye 
                     }, function (error) {
                         //console.log(data);
                         $location.url('/login'); //otherwise signinpage
                     });
-            }
-            else {
+            } else {
                 $location.url('/login'); //otherwise signinpage   
             }
-        }, loggedin: function (register_login) {
+        },
+        loggedin: function (register_login) {
             //console.log("loggedin");
             if ($rootScope.is_loggedin === true && $rootScope.role === '10') {
                 //console.log("customer is logged in");
                 $location.url('/cust-dash');
-            }
-            else if ($rootScope.is_loggedin === true && $rootScope.role === '20') {
+            } else if ($rootScope.is_loggedin === true && $rootScope.role === '20') {
                 //console.log("cleaner is logged in");
                 $location.url('/dash');
-            }
-            else if (register_login === 0) {
+            } else if (register_login === 0) {
                 //console.log("User want to see login or signup page");
                 $location.url('/login');
-            }
-            else {
+            } else {
                 //console.log("user is not logged in and wants to see regsiter page");
                 $location.url('/signup');
             }
 
-        }, role: function () {
+        },
+        role: function () {
 
             $rootScope.role = $cookies.get('role');
             if (angular.equals($rootScope.role, '10')) {
                 $location.url('/cust-dash');
                 //console.log("Customer is here");
-            }
-            else if (angular.equals($rootScope.role, '20')) {
+            } else if (angular.equals($rootScope.role, '20')) {
                 $location.url('/dash');
                 //console.log("Cleaner is here");
-            }
-            else {
+            } else {
                 $location.url('/login');
             }
         },
         customer: function () {
 
             $rootScope.role = $cookies.get('role');
-            if (angular.equals($rootScope.role, '10')) {
-            }
-            else if (angular.equals($rootScope.role, '20')) {
+            if (angular.equals($rootScope.role, '10')) {} else if (angular.equals($rootScope.role, '20')) {
                 $location.url('/dash');
-            }
-            else {
+            } else {
                 $location.url('/login');
             }
         },
         cleaner: function (jobid) {
             $rootScope.role = $cookies.get('role');
             if (angular.equals($rootScope.role, '20')) {
-               return $http.get(api_base_url + '/rating/notification?access-token=' + $rootScope.auth_token,
-                    {
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                return $http.get(api_base_url + '/rating/notification?access-token=' + $rootScope.auth_token, {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
                     })
                     .then(function (data) {
                         console.log(data.data);
@@ -256,18 +266,15 @@ app.factory('checkAuth', function ($http, $rootScope, $location, $cookies,$route
                                     console.log('Job id exist, he has not given rating yet, allow him to visit this page');
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             $location.url('/dash');
                         }
                     }, function (error) {
                         $location.url('/dash');
                     });
-            }
-            else if (angular.equals($rootScope.role, '10')) {
+            } else if (angular.equals($rootScope.role, '10')) {
                 $location.url('/cust-dash');
-            }
-            else {
+            } else {
                 $location.url('/login');
             }
         }
