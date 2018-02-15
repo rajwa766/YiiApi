@@ -442,7 +442,6 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
             })
             .then(function (response) {
                 $scope.all_ads = response.data;
-                console.log($scope.all_ads);
             }, function (error) {
                 console.log(error);
             });

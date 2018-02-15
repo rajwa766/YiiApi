@@ -31,8 +31,12 @@
             </div>
         </h3>
         <p class="p-l-10">
-            <span>
-                <ng-rate-it ng-model="readonly" read-only="true"></ng-rate-it>
+            <span ng-if="r.user.rating">
+                <ng-rate-it ng-model="r.user.rating " read-only="true"></ng-rate-it>
+            </span>
+            <span ng-if="!r.user.rating">
+                Not rated yet
+                <br>
             </span>
             <span ng-if="r.user.first_name || r.user.last_name">
                 <i class="fa fa-user" aria-hidden="true"></i> {{r.user.first_name}} {{r.user.last_name}}</span>
