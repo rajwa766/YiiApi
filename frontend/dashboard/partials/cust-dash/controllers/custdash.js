@@ -442,6 +442,11 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
             })
             .then(function (response) {
                 $scope.all_ads = response.data;
+                if ($scope.all_ads[0].image && $scope.all_ads[1].image && $scope.all_ads[2].image) {
+                    $scope.isTrue = true;
+                } else {
+                    $scope.isTrue = false;
+                }
             }, function (error) {
                 console.log(error);
             });

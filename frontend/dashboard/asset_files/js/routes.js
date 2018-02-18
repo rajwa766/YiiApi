@@ -69,6 +69,18 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }
             }
         })
+        .when('/payment', {
+            templateUrl: 'partials/dashboard/views/payment.html',
+            controller: 'dashCtrl',
+            resolve: {
+                lazy: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'cleaner',
+                        files: ['partials/dashboard/controllers/dash.js']
+                    });
+                }]
+            }
+        })
         .when('/cust-dash', {
             templateUrl: 'partials/cust-dash/views/cdash.html',
             controller: 'cdashCtrl',

@@ -20,7 +20,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         $http({
             method: 'GET',
             url: api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.profileData = data.data;
             // console.log($scope.profileData);
@@ -38,11 +40,13 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
 
     $scope.updateprofile = function (id) {
         $http({
-            method: 'PUT',
-            url: api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token,
-            data: $.param($scope.profileData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'PUT',
+                url: api_base_url + '/users/' + $rootScope.id + '?access-token=' + $rootScope.auth_token,
+                data: $.param($scope.profileData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "Successfully Update Profile", null, 'trustedHtml');
                 $route.reload();
@@ -58,12 +62,14 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
 
     /*********************************************** Preferred Regions **********************************************/
 
-    var pr = this;          //for searchable dropdwn
+    var pr = this; //for searchable dropdwn
     $scope.pref_regions = function () {
         $http({
             method: 'GET',
             url: api_base_url + '/regions?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.regions = data.data.items;
             pr.regions = $scope.regions;
@@ -78,12 +84,14 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
 
     /************************************************ Preferred Categories **********************************************/
 
-    var pc = this;          //for searchable dropdwn
+    var pc = this; //for searchable dropdwn
     $scope.pref_categories = function () {
         $http({
             method: 'GET',
             url: api_base_url + '/categories?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.categories = data.data.items;
             pc.categories = $scope.categories;
@@ -110,7 +118,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         $http({
             method: 'GET',
             url: api_base_url + '/cleaner/view-profile?access-token=' + $rootScope.auth_token + '&expand=cleaner_categories,cleaner_regions,user',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.vprofile = data.data.items[0];
             //console.log($scope.vprofile);
@@ -176,17 +186,18 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
     $scope.assign_cat = function (categories) {
         //console.log(categories);
         $http({
-            method: 'POST',
-            url: api_base_url + '/cleaner-categories?access-token=' + $rootScope.auth_token,
-            data: categories,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'POST',
+                url: api_base_url + '/cleaner-categories?access-token=' + $rootScope.auth_token,
+                data: categories,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 if (vm.regionss || vm.categoriess) {
                     toaster.pop('success', "", "Successfully Updated Categories", null, 'trustedHtml');
 
-                }
-                else
+                } else
                     toaster.pop('success', "", "Successfully Added Categories In", null, 'trustedHtml');
 
             }, function (error) {
@@ -198,17 +209,18 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
     $scope.assign_reg = function (regions) {
         //console.log(regions);
         $http({
-            method: 'POST',
-            url: api_base_url + '/cleaner-regions?access-token=' + $rootScope.auth_token,
-            data: regions,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'POST',
+                url: api_base_url + '/cleaner-regions?access-token=' + $rootScope.auth_token,
+                data: regions,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 if (vm.regionss || vm.categoriess) {
                     toaster.pop('success', "", "Successfully Updated Regions", null, 'trustedHtml');
 
-                }
-                else
+                } else
                     toaster.pop('success', "", "Successfully Added Regions In", null, 'trustedHtml');
             }, function (error) {
                 //console.log(error);
@@ -224,7 +236,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         $http({
             method: 'GET',
             url: api_base_url + '/job/customer-jobs?expand=region,category,user&access-token=BlOsxlz01qLySHWR_xmnJOdSxFFY5gpn',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.ljobs = data.data.items;
             //console.log($scope.ljobs);
@@ -257,20 +271,21 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
     $scope.show_table = false;
     $scope.search_job = function () {
         $http({
-            method: 'GET',
-            url: api_base_url + '/jobs?expand=region,category&access-token=' + $rootScope.auth_token,
-            params: {
-                "category_id": $scope.searchData.category_id,
-                "region_id": $scope.searchData.region_id,
-                "price": $scope.searchData.price,
-                "title": $scope.searchData.title,
-                "description": $scope.searchData.description,
-                "address": $scope.searchData.address,
-                "date": $scope.searchData.date
-            }
-            ,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'GET',
+                url: api_base_url + '/jobs?expand=region,category&access-token=' + $rootScope.auth_token,
+                params: {
+                    "category_id": $scope.searchData.category_id,
+                    "region_id": $scope.searchData.region_id,
+                    "price": $scope.searchData.price,
+                    "title": $scope.searchData.title,
+                    "description": $scope.searchData.description,
+                    "address": $scope.searchData.address,
+                    "date": $scope.searchData.date
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 //console.log(data);
                 $scope.results_search = data.data.items;
@@ -291,7 +306,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         $http({
             method: 'GET',
             url: api_base_url + '/subscriptions?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.all_subscriptions = data.data.items;
             console.log($scope.all_subscriptions);
@@ -310,7 +327,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         $http({
             method: 'GET',
             url: api_base_url + '/ad-places?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.adplaces = data.data.items;
             console.log($scope.adplaces);
@@ -343,15 +362,17 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             return;
         }
         $http({
-            method: 'POST',
-            url: api_base_url + '/ad-pools?access-token=' + $rootScope.auth_token,
-            data: $.param($scope.postadData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'POST',
+                url: api_base_url + '/ad-pools?access-token=' + $rootScope.auth_token,
+                data: $.param($scope.postadData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "Successfully Posted Ad", null, 'trustedHtml')
                 $scope.postadData = {};
-                $scope.f = {};   //  To remove the loading bar and file name
+                $scope.f = {}; //  To remove the loading bar and file name
                 console.log(data);
             }, function (error) {
                 for (var i = 0; i <= error.data.length; i++)
@@ -374,11 +395,13 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
 
     $scope.cleaner_rating = function () {
         $http({
-            method: 'POST',
-            url: api_base_url + '/ratings?access-token=' + $rootScope.auth_token,
-            data: $.param($scope.ratingData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
+                method: 'POST',
+                url: api_base_url + '/ratings?access-token=' + $rootScope.auth_token,
+                data: $.param($scope.ratingData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
             .then(function (data) {
                 toaster.pop('success', "", "You have given rating Successfully", null, 'trustedHtml')
                 $location.path('/dash');
@@ -402,8 +425,12 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         if (file) {
             file.upload = Upload.upload({
                 url: api_base_url + '/upload/upload?access-token=' + $rootScope.auth_token,
-                headers: { 'Authorization': $rootScope.auth_token },
-                data: { data: file }
+                headers: {
+                    'Authorization': $rootScope.auth_token
+                },
+                data: {
+                    data: file
+                }
             });
 
             file.upload.then(function (response) {

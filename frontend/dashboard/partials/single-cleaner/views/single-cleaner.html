@@ -44,93 +44,24 @@
     </div>
     <div class="col-md-8 col-xs-12">
       <div class="white-box">
-        <h4 class="page-title color-blue p-l-10">RECENT EVALUATIONS (827)
+        <h4 class="page-title color-blue p-l-10">RECENT EVALUATIONS ({{scleanerData.rating_detail.length}})
         </h4>
         <ul class="search-listing">
           <div>
-            <li class="p-b-30">
+            <li class="p-b-30" ng-repeat="comments in scleanerData.rating_detail">
               <h3 class="p-l-10">
-                <a href="">Astonishing</a>
+                <a href="">{{comments.first_name}}</a>
               </h3>
               <p class="p-l-10 p-t-10">
-                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</span>
+                <span>{{comments.review}}</span>
               </p>
               <p class="p-l-10">
                 <span>
-                  <ng-rate-it ng-model="readonly" read-only="true"></ng-rate-it>
+                  <ng-rate-it ng-model="comments.rating" read-only="true"></ng-rate-it>
                 </span>
               </p>
               <div class="pull-right">
-                <span>usman, yesterday</span>
-              </div>
-            </li>
-            <li class="p-b-30">
-              <h3 class="p-l-10">
-                <a href="">Astonishing</a>
-              </h3>
-              <p class="p-l-10 p-t-10">
-                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</span>
-              </p>
-              <p class="p-l-10">
-                <span>
-                  <ng-rate-it ng-model="readonly" read-only="true"></ng-rate-it>
-                </span>
-              </p>
-              <div class="pull-right">
-                <span>usman, yesterday</span>
-              </div>
-            </li>
-            <li class="p-b-30">
-              <h3 class="p-l-10">
-                <a href="">Astonishing</a>
-              </h3>
-              <p class="p-l-10 p-t-10">
-                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</span>
-              </p>
-              <p class="p-l-10">
-                <span>
-                  <ng-rate-it ng-model="readonly" read-only="true"></ng-rate-it>
-                </span>
-              </p>
-              <div class="pull-right">
-                <span>usman, yesterday</span>
-              </div>
-            </li>
-            <li class="p-b-30">
-              <h3 class="p-l-10">
-                <a href="">Astonishing</a>
-              </h3>
-              <p class="p-l-10 p-t-10">
-                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</span>
-              </p>
-              <p class="p-l-10">
-                <span>
-                  <ng-rate-it ng-model="readonly" read-only="true"></ng-rate-it>
-                </span>
-              </p>
-              <div class="pull-right">
-                <span>usman, yesterday</span>
-              </div>
-            </li>
-            <li class="p-b-30">
-              <h3 class="p-l-10">
-                <a href="">Astonishing</a>
-              </h3>
-              <p class="p-l-10 p-t-10">
-                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</span>
-              </p>
-              <p class="p-l-10">
-                <span>
-                  <ng-rate-it ng-model="readonly" read-only="true"></ng-rate-it>
-                </span>
-              </p>
-              <div class="pull-right">
-                <span>usman, yesterday</span>
+                <span>{{comments.timestamp}}</span>
               </div>
             </li>
         </ul>
