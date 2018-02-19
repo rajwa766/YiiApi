@@ -7,34 +7,42 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="white-box custom-padding-left-right">
                             <h3 class="box-title m-b-0 text-center">Payment</h3>
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" name="paymentForm" ng-submit="paymentForm.$valid && payment()" novalidate>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label">Name on card*</label>
+                                    <label for="name" class="col-sm-3 control-label">Name on card*</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputEmail3" placeholder="Name on card" type="email">
+                                        <p ng-show="submitted && paymentForm.name.$invalid" class="help-block color-red">Enter valid name</p>
+                                        <input class="form-control" name="name" ng-model="paymentData.name" placeholder="Name on card" type="text" minlength="1"
+                                            maxlength="100" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label">Card number*</label>
+                                    <label for="card_number" class="col-sm-3 control-label">Card number*</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputEmail3" placeholder="Card number" type="email">
+                                        <p ng-show="submitted && paymentForm.card_number.$invalid" class="help-block color-red">Enter valid card number</p>
+                                        <input class="form-control" name="card_number" ng-model="paymentData.card_number" placeholder="Card number (4242424242424242)"
+                                            type="text" minlength="16" maxlength="16" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label">Expiry*</label>
+                                    <label for="expiry_date" class="col-sm-3 control-label">Expiry*</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputEmail3" placeholder="Expiry" type="email">
+                                        <p ng-show="submitted && paymentForm.expiry_date.$invalid" class="help-block color-red">Enter valid expiry date</p>
+                                        <input class="form-control" name="expiry_date" ng-model="paymentData.expiry" placeholder="Expiry (mm/yyyy)" type="text" minlength="7"
+                                            maxlength="7" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">CVC*</label>
+                                    <label for="cvc" class="col-sm-3 control-label">CVC*</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputPassword3" placeholder="CVC" type="password">
+                                        <p ng-show="submitted && paymentForm.cvc.$invalid" class="help-block color-red">Enter valid cvc</p>
+                                        <input class="form-control" name="cvc" ng-model="paymentData.cvc" placeholder="CVC (123)" type="text" minlength="3" maxlength="3"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-info waves-effect waves-light m-t-10">Pay 170 $</button>
+                                        <button type="submit" ng-click="submitted=true" class="btn btn-info waves-effect waves-light m-t-10">Pay {{paymentData.amount}} $</button>
                                     </div>
                                 </div>
                             </form>

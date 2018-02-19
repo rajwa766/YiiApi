@@ -475,4 +475,39 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
     // }
 
     /************************************************** Checkbox is checked ends here ******************************************** */
+
+    /*********************************************** Payment*************************************************/
+    $scope.paymentData = {};
+    $scope.paymentData.currency = 'USD';
+    $scope.paymentData.amount = 2000;
+
+
+    $scope.payment = function () {
+        if ($scope.paymentData.expiry) {
+            var str = $scope.paymentData.expiry;
+            splitted_str = str.split('/');
+
+            $scope.paymentData.expiry_year = splitted_str[splitted_str.length - 1];
+            $scope.paymentData.expiry_month = splitted_str[splitted_str.length - 2];
+        }
+        $http({
+            method: 'POST',
+            url: api_base_url + '/job/payment?access-token=' + $rootScope.auth_token,
+            data: $.param($scope.paymentData),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (data) {
+            // $scope.payment_response = data.data.message;
+            toaster.pop('success', "", "Payment has been done", null, 'trustedHtml');
+            $location.path('/dash');
+            $scope.paymentData = [];
+        }, function (error) {
+            console.log('------------------------------------');
+            console.log(error);
+            console.log('------------------------------------');
+            toaster.pop('error', "", error.data.message, null, 'trustedHtml');
+        });
+    };
 });
+/************************************************************payment ends here***************************************/

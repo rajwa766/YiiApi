@@ -8,7 +8,9 @@ app.controller('signupCtrl', function ($http, $scope, toaster, $location) {
             method: 'POST',
             url: api_base_url + '/user/signup',
             data: $.param($scope.registerData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             // Message displayed to user (account successfully registered)    
             $scope.register_response = data.data.message;

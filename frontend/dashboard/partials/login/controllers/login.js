@@ -9,7 +9,9 @@ app.controller('loginCtrl', function ($http, $scope, $routeParams, $location, $c
             method: 'POST',
             url: api_base_url + '/user/login',
             data: $.param($scope.loginData),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             toaster.pop('success', "", "Successfully Logged In", null, 'trustedHtml');
             $cookies.put('auth_token', data.data.access_token);
@@ -33,10 +35,10 @@ app.controller('loginCtrl', function ($http, $scope, $routeParams, $location, $c
             }
 
         }, function (error) {
-            if(error.data.password)
-            toaster.pop('error', "", error.data.password, null, 'trustedHtml');
-            if(error.data.email)
-            toaster.pop('error', "", error.data.email, null, 'trustedHtml');
+            if (error.data.password)
+                toaster.pop('error', "", error.data.password, null, 'trustedHtml');
+            if (error.data.email)
+                toaster.pop('error', "", error.data.email, null, 'trustedHtml');
 
         });
     };
