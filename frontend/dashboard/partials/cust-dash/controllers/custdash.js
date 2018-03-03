@@ -19,6 +19,8 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
 
     $scope.profileData = {};
     $scope.jobData = {};
+    $scope.cleaner_across_category = $routeParams.cleanerId;
+
 
     $scope.viewprofile = function (id) {
         $http({
@@ -288,6 +290,10 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
             $scope.searchcleanData.category_id = "";
         if (!$scope.searchcleanData.region_id)
             $scope.searchcleanData.region_id = "";
+
+        if ($routeParams.cleanerId) {
+            $scope.searchcleanData.category_id = $routeParams.cleanerId;
+        }
         $http({
                 method: 'GET',
                 url: api_base_url + '/cleaners?category=' + $scope.searchcleanData.category_id + '&region=' + $scope.searchcleanData.region_id + '&expand=user&access-token=' + $rootScope.auth_token,
@@ -297,7 +303,7 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
             })
             .then(function (data) {
                 $scope.rsc = data.data.items; // result search cleaner
-                console.log(data.data.items.length);
+                // console.log(data.data.items.length);
                 $scope.length_of_result = "";
                 $scope.length_of_result = data.data.items.length;
                 $scope.show_search_clean = false;
@@ -313,6 +319,11 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
     };
 
     $scope.search_cleaners();
+
+    if ($scope.cleaner_across_category) {
+        // across a category search cleaners
+        $scope.search_cleaners();
+    }
 
     /************************************************** Add preferredform ends here ************************************/
 

@@ -15,10 +15,12 @@ app.controller('scleanerCtrl', function ($http, $scope, $location, $compile, $ro
         $http({
             method: 'GET',
             url: api_base_url + '/users/' + $scope.single_cleaner_id + '?access-token=' + $rootScope.auth_token,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
         }).then(function (data) {
             $scope.scleanerData = data.data;
-            console.log($scope.scleanerData);
+            // console.log($scope.scleanerData);
         }, function (error) {
             console.log(error);
 

@@ -238,6 +238,23 @@
 	padding-right: 15%;
 }
 
+#packages .white-box {
+	background-color: #f7f7f7;
+	text-align: center
+}
+
+#packages .display-block {
+	display: block !important;
+}
+
+.membership-description {
+	white-space: initial;
+}
+
+.membership-description::first-letter {
+	text-transform: uppercase;
+}
+
 @media (min-width: 370px) {
 	#wrapper.fix-top .sidebar {
 		max-width: initial;

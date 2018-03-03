@@ -27,7 +27,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             $scope.profileData = data.data;
             // console.log($scope.profileData);
         }, function (error) {
-            //console.log(error);
+            // console.log(error);
 
         });
     };
@@ -52,7 +52,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
                 $route.reload();
 
             }, function (error) {
-                //console.log(error);
+                // console.log(error);
 
             });
     };
@@ -73,9 +73,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         }).then(function (data) {
             $scope.regions = data.data.items;
             pr.regions = $scope.regions;
-            console.log($scope.regions);
+            // console.log($scope.regions);
         }, function (error) {
-            //console.log(error);
+            // console.log(error);
 
         });
     };
@@ -95,9 +95,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
         }).then(function (data) {
             $scope.categories = data.data.items;
             pc.categories = $scope.categories;
-            console.log($scope.categories);
+            // console.log($scope.categories);
         }, function (error) {
-            //console.log(error);
+            // console.log(error);
 
         });
     };
@@ -123,8 +123,8 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             }
         }).then(function (data) {
             $scope.vprofile = data.data.items[0];
-            //console.log($scope.vprofile);
-            //console.log($scope.vprofile.cleaner_categories);
+            // console.log($scope.vprofile);
+            // console.log($scope.vprofile.cleaner_categories);
             // used for pre selected 
             // vm.categoriess = data.data.items[0].cleaner_categories;
             //vm.regionss = data.data.items[0].cleaner_regions;
@@ -133,7 +133,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             $scope.regionss = data.data.items[0].cleaner_regions;
 
         }, function (error) {
-            //console.log(error);
+            // console.log(error);
 
         });
     };
@@ -173,8 +173,8 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             cat_id[key_name] = $scope.categoriess[j].id;
             j++;
         }
-        ////console.log(cat_id);
-        ////console.log(region_id);
+        //console.log(cat_id);
+        //console.log(region_id);
 
         $scope.assign_cat(jQuery.param(cat_id));
 
@@ -184,7 +184,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
     };
 
     $scope.assign_cat = function (categories) {
-        //console.log(categories);
+        // console.log(categories);
         $http({
                 method: 'POST',
                 url: api_base_url + '/cleaner-categories?access-token=' + $rootScope.auth_token,
@@ -201,13 +201,13 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
                     toaster.pop('success', "", "Successfully Added Categories In", null, 'trustedHtml');
 
             }, function (error) {
-                //console.log(error);
+                // console.log(error);
 
             });
     };
 
     $scope.assign_reg = function (regions) {
-        //console.log(regions);
+        // console.log(regions);
         $http({
                 method: 'POST',
                 url: api_base_url + '/cleaner-regions?access-token=' + $rootScope.auth_token,
@@ -223,7 +223,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
                 } else
                     toaster.pop('success', "", "Successfully Added Regions In", null, 'trustedHtml');
             }, function (error) {
-                //console.log(error);
+                // console.log(error);
 
             });
     };
@@ -241,9 +241,9 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             }
         }).then(function (data) {
             $scope.ljobs = data.data.items;
-            //console.log($scope.ljobs);
+            // console.log($scope.ljobs);
         }, function (error) {
-            //console.log(error);
+            // console.log(error);
 
         });
     };
@@ -257,7 +257,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
     $scope.viewJobModel = function (job) {
         /* Passing the object from function call and then put in page object, dont need view single job api*/
         $scope.page = job;
-        //console.log($scope.page);
+        // console.log($scope.page);
         //     $('#view_job').modal('toggle');
         $scope.dash_show = 5;
     };
@@ -287,13 +287,13 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
                 }
             })
             .then(function (data) {
-                //console.log(data);
+                // console.log(data);
                 $scope.results_search = data.data.items;
                 $scope.show_search = false;
                 $scope.show_table = true;
-                //console.log($scope.show_search);
+                // console.log($scope.show_search);
             }, function (error) {
-                //console.log(error);
+                // console.log(error);
 
             });
     };
@@ -311,10 +311,10 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             }
         }).then(function (data) {
             $scope.all_subscriptions = data.data.items;
-            console.log($scope.all_subscriptions);
+            // console.log($scope.all_subscriptions);
             // sb.all_subscriptions = data.data;
         }, function (error) {
-            console.log(error);
+            // console.log(error);
 
         });
     };
@@ -332,10 +332,10 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             }
         }).then(function (data) {
             $scope.adplaces = data.data.items;
-            console.log($scope.adplaces);
+            // console.log($scope.adplaces);
             //ads.adplaces = data.data;
         }, function (error) {
-            console.log(error);
+            // console.log(error);
 
         });
     };
@@ -348,7 +348,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             $scope.ad_width = "755";
             $scope.ad_height = "150";
         }
-        console.log($scope.ad_width + $scope.ad_height);
+        // console.log($scope.ad_width + $scope.ad_height);
     }
 
 
@@ -373,12 +373,12 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
                 toaster.pop('success', "", "Successfully Posted Ad", null, 'trustedHtml')
                 $scope.postadData = {};
                 $scope.f = {}; //  To remove the loading bar and file name
-                console.log(data);
+                // console.log(data);
             }, function (error) {
                 for (var i = 0; i <= error.data.length; i++)
                     toaster.pop('warning', "", error.data[i].message, null, 'trustedHtml')
 
-                console.log(error);
+                // console.log(error);
 
             });
     };
@@ -405,7 +405,7 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             .then(function (data) {
                 toaster.pop('success', "", "You have given rating Successfully", null, 'trustedHtml')
                 $location.path('/dash');
-                console.log(data);
+                // console.log(data);
             }, function (error) {
                 if (error.data[1].message)
                     toaster.pop('error', "", error.data[1].message, null, 'trustedHtml');
@@ -450,31 +450,6 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
 
     }
 
-    /************************************************** File Upload ***************************************************************/
-
-    /************************************************** Checkbox is checked *******************************************************/
-
-    // $scope.isTrue = function (id, whichCheckbox) {
-    //     if ($scope.categoriess && whichCheckbox == 1) {
-    //         for (var i = 0; i < $scope.categoriess.length; i++) {
-    //             if ($scope.categoriess[i].id == id) {
-    //                 return true;
-    //             }
-    //         }
-    //         return false;
-    //     }
-
-    //     if ($scope.regionss && whichCheckbox == 2) {
-    //         for (var i = 0; i < $scope.regionss.length; i++) {
-    //             if ($scope.regionss[i].id == id) {
-    //                 return true;
-    //             }
-    //         }
-    //         return false;
-    //     }
-    // }
-
-    /************************************************** Checkbox is checked ends here ******************************************** */
 
     /*********************************************** Payment*************************************************/
     $scope.paymentData = {};
@@ -503,11 +478,30 @@ app.controller('dashCtrl', function ($http, $scope, $location, $compile, $rootSc
             $location.path('/dash');
             $scope.paymentData = [];
         }, function (error) {
-            console.log('------------------------------------');
-            console.log(error);
-            console.log('------------------------------------');
             toaster.pop('error', "", error.data.message, null, 'trustedHtml');
         });
     };
+    /************************************************************payment ends here***************************************/
+
+    /*********************************************** membership*************************************************/
+
+    $scope.membership = function () {
+        $http({
+            method: 'GET',
+            url: api_base_url + '/memberships?access-token=' + $rootScope.auth_token,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (data) {
+            console.log('------------------------------------');
+            console.log(data);
+            console.log('------------------------------------');
+            $scope.membership_list = data.data.items;
+        }, function (error) {});
+    };
+
+    $scope.membership();
+
 });
+
 /************************************************************payment ends here***************************************/

@@ -218,94 +218,111 @@
                             <!-- popup view job ends here-->
 
                             <div ng-show="dash_show==7" ng-init="get_subscriptions();get_adplaces()">
-                                <form class="form-horizontal" id="adForm" name="adForm" ng-submit="adForm.$valid && post_ad()" novalidate>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Subscriptions</label>
-                                        <div class="col-sm-12">
-                                            <p ng-show="posted && adForm.subscription_id.$invalid" class="help-block color-red">Choose valid Subscription</p>
-                                            <select class="col-md-12 col-sm-12 col-xs-12" style="padding: 5px;" name="subscription_id" ng-model="postadData.subscription_id"
-                                                ng-options="sub.id as sub.name for sub in all_subscriptions" required>
-                                                <option value='' disabled selected>Choose Subscription</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Ads</label>
-                                        <div class="col-sm-12">
-                                            <p ng-show="posted && adForm.ad_place_id.$invalid" class="help-block color-red">Choose valid Ad</p>
-                                            <select class="col-md-12 col-sm-12 col-xs-12" style="padding: 5px;" name="ad_place_id" ng-model="postadData.ad_place_id"
-                                                ng-options="ads.id as ads.name for ads in adplaces" ng-click="sizeCheck()" required>
-                                                <option value='' disabled selected>Choose Ad</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <img ng-src="{{api_img_url}}{{postadData.resp_img_str}}" ng-if="postadData.resp_img_str" style="width:100px" alt="upload_image">
+                                <div class="row" id="packages">
 
-                                    <p ng-if="postadData.ad_place_id" class="help-block text-center">Image should be {{ad_width}}(width) * {{ad_height}}(height)</p>
-
-                                    <button ng-if="postadData.ad_place_id" type="file" class="m-b-20" name="file" ng-model="picFile" ngf-select="uploadFiles($file, $invalidFiles)"
-                                        accept="image/*" ngf-max-size="5MB" ngf-min-height="{{ad_height}}" ngf-max-height="{{ad_height}}"
-                                        ngf-min-width="{{ad_width}}" ngf-max-width="{{ad_width}}" required> Select File</button>
-
-                                    <p class="help-block color-red" ng-if="adForm.file.$error.maxWidth || adForm.file.$error.minHeight || adForm.file.$error.maxHeight || adForm.file.$error.minWidth">File Dimensions are not correct </p>
-
-                                    <div style="font:smaller" class="m-b-20" ng-if="f">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-                                        <span class="progress" ng-show="f.progress >= 0">
-                                            <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'">
+                                    <div class="col-lg-{{membership_list.length+1}} col-sm-6 col-xs-12" ng-repeat="membership in membership_list">
+                                        <a href="#/payment" class="display-block">
+                                            <div class="white-box analytics-info">
+                                                <h3 class="box-title">{{membership.name}}</h3>
+                                                <ul class="list-inline two-part">
+                                                    <li>
+                                                        <span class="counter">${{membership.price}}</span>
+                                                    </li>
+                                                </ul>
+                                                <p class="membership-description">{{membership.description}}</p>
                                             </div>
-                                        </span>
+                                        </a>
                                     </div>
-                                    {{errorMsg}}
 
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success" type="submit" ng-click="posted=true" ng-disabled="fileselected">Post Ad</button>
+                                    <form class="form-horizontal" id="adForm" name="adForm" ng-submit="adForm.$valid && post_ad()" novalidate>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Subscriptions</label>
+                                            <div class="col-sm-12">
+                                                <p ng-show="posted && adForm.subscription_id.$invalid" class="help-block color-red">Choose valid Subscription</p>
+                                                <select class="col-md-12 col-sm-12 col-xs-12" style="padding: 5px;" name="subscription_id" ng-model="postadData.subscription_id"
+                                                    ng-options="sub.id as sub.name for sub in all_subscriptions" required>
+                                                    <option value='' disabled selected>Choose Subscription</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Ads</label>
+                                            <div class="col-sm-12">
+                                                <p ng-show="posted && adForm.ad_place_id.$invalid" class="help-block color-red">Choose valid Ad</p>
+                                                <select class="col-md-12 col-sm-12 col-xs-12" style="padding: 5px;" name="ad_place_id" ng-model="postadData.ad_place_id"
+                                                    ng-options="ads.id as ads.name for ads in adplaces" ng-click="sizeCheck()"
+                                                    required>
+                                                    <option value='' disabled selected>Choose Ad</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <img ng-src="{{api_img_url}}{{postadData.resp_img_str}}" ng-if="postadData.resp_img_str" style="width:100px" alt="upload_image">
 
-                            <div ng-show="dash_show==8">
-                                <div class="inbox-center">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                            <tr>
-                                                <td class="hidden-xs">Genelia Roshan</td>
-                                                <td class="max-texts">
-                                                    <a href="inbox-detail.html">Lorem ipsum perspiciatis unde omnis iste natus error sit voluptatem</a>
-                                                </td>
-                                                <td class="text-right"> May 09 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="hidden-xs">Ritesh Deshmukh</td>
-                                                <td class="max-texts">
-                                                    <a href="inbox-detail.html">Lorem ipsum perspiciatis unde omnis iste natus error sit voluptatem</a>
-                                                </td>
-                                                <td class="text-right"> May 09 </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        <p ng-if="postadData.ad_place_id" class="help-block text-center">Image should be {{ad_width}}(width) * {{ad_height}}(height)</p>
+
+                                        <button ng-if="postadData.ad_place_id" type="file" class="m-b-20" name="file" ng-model="picFile" ngf-select="uploadFiles($file, $invalidFiles)"
+                                            accept="image/*" ngf-max-size="5MB" ngf-min-height="{{ad_height}}" ngf-max-height="{{ad_height}}"
+                                            ngf-min-width="{{ad_width}}" ngf-max-width="{{ad_width}}" required> Select File</button>
+
+                                        <p class="help-block color-red" ng-if="adForm.file.$error.maxWidth || adForm.file.$error.minHeight || adForm.file.$error.maxHeight || adForm.file.$error.minWidth">File Dimensions are not correct </p>
+
+                                        <div style="font:smaller" class="m-b-20" ng-if="f">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                                            <span class="progress" ng-show="f.progress >= 0">
+                                                <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'">
+                                                </div>
+                                            </span>
+                                        </div>
+                                        {{errorMsg}}
+
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success" type="submit" ng-click="posted=true" ng-disabled="fileselected">Post Ad</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
 
+                                <div ng-show="dash_show==8">
+                                    <div class="inbox-center">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="hidden-xs">Genelia Roshan</td>
+                                                    <td class="max-texts">
+                                                        <a href="inbox-detail.html">Lorem ipsum perspiciatis unde omnis iste natus error sit voluptatem</a>
+                                                    </td>
+                                                    <td class="text-right"> May 09 </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hidden-xs">Ritesh Deshmukh</td>
+                                                    <td class="max-texts">
+                                                        <a href="inbox-detail.html">Lorem ipsum perspiciatis unde omnis iste natus error sit voluptatem</a>
+                                                    </td>
+                                                    <td class="text-right"> May 09 </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
+                    <!-- /.row -->
                 </div>
-                <!-- /.row -->
             </div>
         </div>
+        <!-- /.row -->
     </div>
-    <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
+    <!-- /.container-fluid -->
 
-<!-- /#page-wrapper -->
-<script>
-    jQuery('.mydatepicker, #datepicker').datepicker();
-    jQuery('.mydatepicker-autoclose').datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        dateFormat: 'yyyy/mm/dd'
-    });
-</script>
+    <!-- /#page-wrapper -->
+    <script>
+        jQuery('.mydatepicker, #datepicker').datepicker();
+        jQuery('.mydatepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            dateFormat: 'yyyy/mm/dd'
+        });
+    </script>

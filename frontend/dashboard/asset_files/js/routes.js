@@ -98,7 +98,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }
             }
         })
-        .when('/allcleaners', {
+        .when('/allcleaners/:cleanerId', {
             templateUrl: 'partials/cust-dash/views/allCleaners.html',
             controller: 'cdashCtrl',
             resolve: {
