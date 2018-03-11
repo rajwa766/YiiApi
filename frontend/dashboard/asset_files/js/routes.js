@@ -69,7 +69,19 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }
             }
         })
-        .when('/payment', {
+        .when('/payment/membership', {
+            templateUrl: 'partials/dashboard/views/payment.html',
+            controller: 'dashCtrl',
+            resolve: {
+                lazy: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'cleaner',
+                        files: ['partials/dashboard/controllers/dash.js']
+                    });
+                }]
+            }
+        })
+        .when('/payment/subscription/:subscriptionId', {
             templateUrl: 'partials/dashboard/views/payment.html',
             controller: 'dashCtrl',
             resolve: {

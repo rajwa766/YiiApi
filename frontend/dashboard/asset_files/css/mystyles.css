@@ -255,6 +255,11 @@
 	text-transform: uppercase;
 }
 
+#subsc-ads-pad {
+	padding-top: 150px;
+	padding-bottom: 150px;
+}
+
 @media (min-width: 370px) {
 	#wrapper.fix-top .sidebar {
 		max-width: initial;

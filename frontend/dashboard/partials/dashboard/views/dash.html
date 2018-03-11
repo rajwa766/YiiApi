@@ -220,22 +220,22 @@
                             <div ng-show="dash_show==7" ng-init="get_subscriptions();get_adplaces()">
                                 <div class="row" id="packages">
 
-                                    <div class="col-lg-{{membership_list.length+1}} col-sm-6 col-xs-12" ng-repeat="membership in membership_list">
-                                        <a href="#/payment" class="display-block">
-                                            <div class="white-box analytics-info">
-                                                <h3 class="box-title">{{membership.name}}</h3>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" ng-repeat="sub in all_subscriptions" ng-if="!subscriptions_availability.subscription">
+                                        <a href="#/payment/subscription/{{sub.id}}" class="display-block">
+                                            <div class="white-box analytics-info" id="subsc-ads-pad">
+                                                <h3 class="box-title">{{sub.name}}</h3>
                                                 <ul class="list-inline two-part">
                                                     <li>
-                                                        <span class="counter">${{membership.price}}</span>
+                                                        <span class="counter">${{sub.price}}</span>
                                                     </li>
                                                 </ul>
-                                                <p class="membership-description">{{membership.description}}</p>
+                                                <!-- <p class="membership-description">{{sub.description}}</p> -->
                                             </div>
                                         </a>
                                     </div>
 
-                                    <form class="form-horizontal" id="adForm" name="adForm" ng-submit="adForm.$valid && post_ad()" novalidate>
-                                        <div class="form-group">
+                                    <form class="form-horizontal" id="adForm" name="adForm" ng-submit="adForm.$valid && post_ad()" novalidate ng-if="subscriptions_availability.subscription">
+                                        <!-- <div class="form-group">
                                             <label class="col-sm-12">Subscriptions</label>
                                             <div class="col-sm-12">
                                                 <p ng-show="posted && adForm.subscription_id.$invalid" class="help-block color-red">Choose valid Subscription</p>
@@ -244,7 +244,7 @@
                                                     <option value='' disabled selected>Choose Subscription</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group">
                                             <label class="col-sm-12">Ads</label>
                                             <div class="col-sm-12">
