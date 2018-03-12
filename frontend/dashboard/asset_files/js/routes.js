@@ -65,11 +65,27 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }],
                 app: function ($q, checkAuth) {
                     $q.defer();
-                    return checkAuth.role();
+                    return checkAuth.isPaid();
                 }
             }
         })
-        .when('/payment/membership', {
+        .when('/payment/payment-membership', {
+            templateUrl: 'partials/dashboard/views/payment-membership.html',
+            controller: 'dashCtrl',
+            resolve: {
+                lazy: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'cleaner',
+                        files: ['partials/dashboard/controllers/dash.js']
+                    });
+                }],
+                app: function ($q, checkAuth) {
+                    $q.defer();
+                    return checkAuth.isPaid();
+                }
+            }
+        })
+        .when('/payment/membership/:membershipId', {
             templateUrl: 'partials/dashboard/views/payment.html',
             controller: 'dashCtrl',
             resolve: {
@@ -78,7 +94,11 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                         name: 'cleaner',
                         files: ['partials/dashboard/controllers/dash.js']
                     });
-                }]
+                }],
+                app: function ($q, checkAuth) {
+                    $q.defer();
+                    return checkAuth.isNotPaid();
+                }
             }
         })
         .when('/payment/subscription/:subscriptionId', {
@@ -90,7 +110,11 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                         name: 'cleaner',
                         files: ['partials/dashboard/controllers/dash.js']
                     });
-                }]
+                }],
+                app: function ($q, checkAuth) {
+                    $q.defer();
+                    return checkAuth.isSubscribed();
+                }
             }
         })
         .when('/cust-dash', {
@@ -250,6 +274,35 @@ app.factory('checkAuth', function ($http, $rootScope, $location, $cookies, $rout
                 //console.log("user is not logged in and wants to see regsiter page");
                 $location.url('/signup');
             }
+
+        },
+        isPaid: function () {
+            if ($rootScope.payment == 'null') {
+                $location.url('/payment/payment-membership');
+            } else {
+                $location.url('/dash');
+            }
+        },
+        isNotPaid: function () {
+            if ($rootScope.payment != 'null') {
+                $location.url('/dash');
+            }
+        },
+        isSubscribed: function () {
+            return $http.get(api_base_url + '/ad-pool/subscription?access-token=' + $rootScope.auth_token, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                .then(function (data) {
+                    if (!data.data.subscription) {
+
+                    } else {
+                        $location.url('/dash');
+                    }
+                }, function (error) {
+                    $location.url('/dash');
+                });
 
         },
         role: function () {

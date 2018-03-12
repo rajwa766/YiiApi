@@ -17,12 +17,14 @@ app.controller('loginCtrl', function ($http, $scope, $routeParams, $location, $c
             $cookies.put('auth_token', data.data.access_token);
             $cookies.put('id', data.data.id);
             $cookies.put('role', data.data.role);
+            $cookies.put('payment', data.data.payment);
             if ($cookies.get('auth_token') && $cookies.get('id') && $cookies.get('role')) {
-                console.log("Successfully Getting Aut role status and ID");
+                // console.log("Successfully Getting Aut role status and ID");
                 $rootScope.auth_token = $cookies.get('auth_token');
                 $rootScope.id = $cookies.get('id');
                 $rootScope.role = $cookies.get('role');
                 $rootScope.is_loggedin = true;
+                $rootScope.payment = $cookies.get('payment');
                 // If page refresh i was losing he logged in value so i put it here
             }
             if (data.data.role == 20) {
@@ -52,6 +54,7 @@ app.controller('loginCtrl', function ($http, $scope, $routeParams, $location, $c
         $rootScope.role = $cookies.get('role');
         $rootScope.status = $cookies.get('status');
         $rootScope.id = $cookies.get('id');
+        $rootScope.payment = $cookies.get('payment');
         $location.path('/login');
         $rootScope.is_loggedin = false;
 

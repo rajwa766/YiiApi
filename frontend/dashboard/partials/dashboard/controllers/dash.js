@@ -14,6 +14,8 @@
         $scope.customerid = parseInt($routeParams.customerid);
         $scope.subscriptionId = '';
         $scope.subscriptionId = parseInt($routeParams.subscriptionId);
+        $scope.membershipId = '';
+        $scope.membershipId = parseInt($routeParams.membershipId);
 
 
 
@@ -466,9 +468,6 @@
         $scope.paymentData = {};
         $scope.paymentData.currency = 'USD';
 
-        $scope.paymentData.amount = 2000;
-
-
         $scope.payment = function () {
 
             if ($scope.subscriptionId) {
@@ -482,6 +481,10 @@
                 $scope.paymentData.expiry_year = splitted_str[splitted_str.length - 1];
                 $scope.paymentData.expiry_month = splitted_str[splitted_str.length - 2];
             }
+            if ($scope.membershipId) {
+                $scope.paymentData.amount = $scope.price_membership;
+                $scope.paymentData.membership_id = $scope.membershipId;
+            }
             $http({
                 method: 'POST',
                 url: api_base_url + '/job/payment?access-token=' + $rootScope.auth_token,
@@ -491,9 +494,12 @@
                 }
             }).then(function (data) {
                 // $scope.payment_response = data.data.message;
-                toaster.pop('success', "", "Payment has been done", null, 'trustedHtml');
-                $location.path('/dash');
+                toaster.pop('success', "", "Payment has been done, Visit next time Please", null, 'trustedHtml');
+                // $location.path('/dash');
                 $scope.paymentData = [];
+                $timeout(function () {
+                    $rootScope.logout();
+                }, 2000);
             }, function (error) {
                 toaster.pop('error', "", error.data.message, null, 'trustedHtml');
             });
@@ -511,6 +517,7 @@
                 $scope.paymentData.expiry_month = splitted_str[splitted_str.length - 2];
             }
             $scope.paymentData.subscription_id = $scope.subscriptionId;
+            $scope.paymentData.amount = $scope.price_subscription;
             $http({
                 method: 'POST',
                 url: api_base_url + '/job/paymentpool?access-token=' + $rootScope.auth_token,
@@ -542,6 +549,14 @@
                 }
             }).then(function (data) {
                 $scope.membership_list = data.data.items;
+                if ($scope.membershipId) {
+                    angular.forEach($scope.membership_list, function (value, key) {
+                        if (value.id == $scope.membershipId) {
+                            $scope.price_membership = "";
+                            $scope.price_membership = value.price;
+                        }
+                    });
+                }
             }, function (error) {});
         };
 
@@ -567,6 +582,9 @@
             $scope.get_subscriptions();
         }
         $scope.isSubscribed();
+        if ($scope.membershipId) {
+            $scope.membership();
+        }
     });
 
 

@@ -19,6 +19,7 @@ app.run(function ($rootScope, $compile, $location, $http, toaster, $cookies, $wi
         $rootScope.auth_token = $cookies.get('auth_token');
         $rootScope.id = $cookies.get('id');
         $rootScope.role = $cookies.get('role');
+        $rootScope.payment = $cookies.get('payment');
         $rootScope.is_loggedin = true;
     } else {
         //console.log('No cookie found');
@@ -28,6 +29,7 @@ app.run(function ($rootScope, $compile, $location, $http, toaster, $cookies, $wi
         $cookies.remove('auth_token');
         $cookies.remove('id');
         $cookies.remove('role');
+        $cookies.remove('payment');
         $location.path('/login');
         //console.log("Logout Successfully");
 
@@ -35,7 +37,7 @@ app.run(function ($rootScope, $compile, $location, $http, toaster, $cookies, $wi
         $rootScope.role = $cookies.get('role');
         $rootScope.status = $cookies.get('status');
         $rootScope.id = $cookies.get('id');
-
+        $rootScope.payment = $cookies.get('payment');
         $rootScope.is_loggedin = false;
     };
 
