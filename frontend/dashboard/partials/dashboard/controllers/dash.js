@@ -466,7 +466,7 @@
 
         /*********************************************** Payment*************************************************/
         $scope.paymentData = {};
-        $scope.paymentData.currency = 'USD';
+        $scope.paymentData.currency = 'usd';
 
         $scope.payment = function () {
 
