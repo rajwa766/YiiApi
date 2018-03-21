@@ -179,6 +179,48 @@
                                             </div>
                                         </a>
                                     </div>
+                                    <div class="row row-in" ng-if="subscriptions_availability.subscription">
+                                        <div class="col-lg-3 col-sm-6 row-in-br">
+                                            <div class="col-in row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h5 class="text-muted vb text-center">Package Name</h5>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h4 class="counter text-center m-t-15 text-danger">{{subscriptions_availability.pakageName}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                                            <div class="col-in row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h5 class="text-muted vb text-center">Package Price</h5>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h4 class="counter text-center m-t-15 text-megna">{{subscriptions_availability.pakagePrice}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-6 row-in-br">
+                                            <div class="col-in row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h5 class="text-muted vb text-center">Package Days</h5>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h4 class="counter text-center m-t-15 text-primary">{{subscriptions_availability.pakageDays}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-6  b-0">
+                                            <div class="col-in row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h5 class="text-muted vb text-center">Days Left</h5>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h4 class="counter text-center m-t-15 text-success">{{subscriptions_availability.daysLeft}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <form class="form-horizontal" id="adForm" name="adForm" ng-submit="adForm.$valid && post_ad()" novalidate ng-if="subscriptions_availability.subscription">
                                         <div class="form-group">

@@ -134,7 +134,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 }
             }
         })
-        .when('/allcleaners/:cleanerId', {
+        .when('/cust-dash/:cleanerId', {
             templateUrl: 'partials/cust-dash/views/allCleaners.html',
             controller: 'cdashCtrl',
             resolve: {
@@ -144,7 +144,11 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                         name: 'cleaner',
                         files: ['partials/cust-dash/controllers/custdash.js']
                     });
-                }]
+                }],
+                app: function ($q, checkAuth) {
+                    $q.defer();
+                    return checkAuth.auth_token();
+                }
             }
         })
         .when('/activate-account', {
@@ -273,6 +277,14 @@ app.factory('checkAuth', function ($http, $rootScope, $location, $cookies, $rout
             } else {
                 //console.log("user is not logged in and wants to see regsiter page");
                 $location.url('/signup');
+            }
+
+        },
+
+
+        auth_token: function () {
+            if (!$rootScope.auth_token) {
+                $location.url('/login');
             }
 
         },

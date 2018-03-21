@@ -296,7 +296,7 @@ app.controller('cdashCtrl', function ($http, $scope, $location, $compile, $rootS
         }
         $http({
                 method: 'GET',
-                url: api_base_url + '/cleaners?category=' + $scope.searchcleanData.category_id + '&region=' + $scope.searchcleanData.region_id + '&expand=user&access-token=' + $rootScope.auth_token,
+                url: api_base_url + '/cleaners?category=' + $scope.searchcleanData.category_id + '&region=' + $scope.searchcleanData.region_id + '&expand=user&access-token=' + $rootScope.auth_token ? $rootScope.auth_token : '',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
